@@ -7,7 +7,7 @@ class Envie_Receba():
     def __init__(self):
         self.excel_file = 'revisao.xlsx'
         
-        self.conexao = sqlite3.connect('palavras_bank.db')  # Conecte ao seu banco de dados
+        self.conexao = sqlite3.connect('palavras_bank.db')  
         self.comando = self.conexao.cursor()
 
 
@@ -35,7 +35,7 @@ class Envie_Receba():
 
             arquivo.write(f"{resposta['palavra']}\t{resposta['mensagem']}\n")
 
-        # Retorna a resposta em formato JSON
+    
         return jsonify(resposta)
 
 
@@ -54,10 +54,8 @@ def manda_me_palavra():
     data = request.get_json()
     palavra = data['palavra']
 
-    # Criar uma instância da classe Envie_Receba (opcional)
     envie_receba = Envie_Receba()
 
-    # Chamar o método busca_palavra da classe
     resultado = Envie_Receba().busca_palavra(palavra)
 
     return jsonify(resultado)
